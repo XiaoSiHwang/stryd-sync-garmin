@@ -44,10 +44,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt        
       if: steps.pip-cache.outputs.cache-hit != 'true'
-    - name: Run Garmin Sync
+    - name: Run Stryd Sync Garmin
       run: |
         python scripts/stryd/stryd_sync_connect.py        
-    - name: Push new cookie
+    - name: Push new Activity
       run: |
         git config --local user.email "${{ env.GITHUB_EMAIL }}"
         git config --local user.name "${{ env.GITHUB_NAME }}"
