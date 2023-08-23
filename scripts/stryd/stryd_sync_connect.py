@@ -29,6 +29,7 @@ SYNC_CONFIG = {
 
 def init(stryd_db):
     ## 判断RQ数据库是否存在
+    print(os.path.join(DB_DIR, stryd_db.stryd_db_name))
     if not os.path.exists(os.path.join(DB_DIR, stryd_db.stryd_db_name)):
         ## 初始化建表
         stryd_db.initDB()
