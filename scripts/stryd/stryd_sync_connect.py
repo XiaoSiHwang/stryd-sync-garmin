@@ -57,13 +57,13 @@ if __name__ == "__main__":
   strydClient = StrydClient(login_user)
   activities = strydClient.activities()
 
-
   for activity in activities["activities"]:
     s = StrydActivity()
     id = activity["id"]
 
     s.activity_id = id
     s.activity_data = activity
+    stryd_db.saveActivity(s)
 
   ## 查询未上传的运动
   activity_id_list = stryd_db.getUnSyncActivity()
