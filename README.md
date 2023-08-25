@@ -1,7 +1,7 @@
 # Stryd 同步佳明脚本（支持国际区与国区）
 
 ## 注意
-### 目前脚本不支持Stryd OAuth2的帐号即 Google、Facebook、Apple等帐号关联登录目前还不支持、只支持邮箱密码登录
+### 目前脚本不支持Stryd OAuth2的帐号即 Google、Facebook、Apple等帐号关联登录目前还不支持只支持邮箱密码登录
 
 ## 参数配置
 |       参数名       |                备注                |    案例     |
