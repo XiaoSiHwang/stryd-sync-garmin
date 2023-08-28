@@ -1,5 +1,6 @@
 # Stryd 同步佳明脚本（支持国际区与国区）
-
+## 致谢
+- 本脚本佳明模块代码来自@[yihong0618](https://github.com/yihong0618) 的 [running_page](https://github.com/yihong0618/running_page) 个人跑步主页项目,在此非常感谢@[yihong0618](https://github.com/yihong0618)大佬的无私奉献！！！
 ## 注意
 ### 目前脚本不支持Stryd OAuth2的帐号即 Google、Facebook、Apple等帐号关联登录只支持邮箱密码登录
 
