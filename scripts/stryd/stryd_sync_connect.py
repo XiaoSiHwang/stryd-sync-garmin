@@ -16,6 +16,7 @@ from stryd_client import StrydClient
 from stryd.entity.login_user import LoginUser
 from stryd.entity.stryd_activity import StrydActivity
 from garmin.garmin_connect import GarminConnect
+from garmin.garmin_client import GarminClient
 
 
 SYNC_CONFIG = {
@@ -79,9 +80,8 @@ if __name__ == "__main__":
   GARMIN_EMAIL = SYNC_CONFIG["GARMIN_EMAIL"]
   GARMIN_PASSWORD = SYNC_CONFIG["GARMIN_PASSWORD"]
   GARMIN_AUTH_DOMAIN = SYNC_CONFIG["GARMIN_AUTH_DOMAIN"]
-  garminConnect = GarminConnect(GARMIN_EMAIL,GARMIN_PASSWORD,GARMIN_AUTH_DOMAIN,False)
+  garminClient = GarminClient(GARMIN_EMAIL, GARMIN_PASSWORD, GARMIN_AUTH_DOMAIN)
 
-  loop = asyncio.get_event_loop()
 
 
 
@@ -91,9 +91,8 @@ if __name__ == "__main__":
       response = req.request('GET', download_url)
       with open(file_path, 'wb') as f:
         f.write(response.data)
-      upload_activity_task = asyncio.ensure_future(garminConnect.upload_activities(file_path))
-      upload_status = loop.run_until_complete(upload_activity_task)
+      upload_status = garminClient.upload_activity(file_path)
+      print(f"{activity_id}.fit upload status {upload_status}")
       if upload_status in ("SUCCESS", "DUPLICATE_ACTIVITY"):
           stryd_db.updateSyncStatus(activity_id)
-  loop.close()
         
