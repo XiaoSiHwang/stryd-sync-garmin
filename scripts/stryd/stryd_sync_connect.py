@@ -86,13 +86,16 @@ if __name__ == "__main__":
 
 
   for activity_id in activity_id_list:
-      download_url = strydClient.get_download_url(activity_id)
-      file_path = os.path.join(STRYD_FIT_DIR, f"{activity_id}.fit")
-      response = req.request('GET', download_url)
-      with open(file_path, 'wb') as f:
-        f.write(response.data)
-      upload_status = garminClient.upload_activity(file_path)
-      print(f"{activity_id}.fit upload status {upload_status}")
-      if upload_status in ("SUCCESS", "DUPLICATE_ACTIVITY"):
-          stryd_db.updateSyncStatus(activity_id)
+      try:
+        download_url = strydClient.get_download_url(activity_id)
+        file_path = os.path.join(STRYD_FIT_DIR, f"{activity_id}.fit")
+        response = req.request('GET', download_url)
+        with open(file_path, 'wb') as f:
+          f.write(response.data)
+        upload_status = garminClient.upload_activity(file_path)
+        print(f"{activity_id}.fit upload status {upload_status}")
+        if upload_status in ("SUCCESS", "DUPLICATE_ACTIVITY"):
+            stryd_db.updateSyncStatus(activity_id)
+      except Exception as e:
+         print("同步Stryd运动至佳明异常，运动id:%s, 异常原因:%s", activity_id, e)
         
